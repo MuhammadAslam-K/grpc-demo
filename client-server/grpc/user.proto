@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package user;
+
+// The user service definition.
+service UserService {
+  rpc GetAllUsers(Empty) returns (UserList) {}
+  rpc CreateUser(UserData) returns (UserResponse) {}
+  rpc GetUserById(UserId) returns (UserResponse) {}
+  rpc UpdateUserById(UserUpdate) returns (UserResponse) {}
+  rpc DeleteUserById(UserId) returns (UserResponse) {}
+}
+
+// Empty message
+message Empty {}
+
+// User messages
+message UserData {
+  string name = 1;
+  string email = 2;
+}
+
+message UserId {
+  string id = 1;
+}
+
+message UserUpdate {
+  string id = 1;
+  UserData data = 2;
+}
+
+message UserResponse {
+  string name = 1;
+  string email = 2;
+}
+
+message UserList {
+  repeated UserResponse users = 1;
+}
